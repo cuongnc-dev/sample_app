@@ -1,4 +1,4 @@
-<li id="micropost-<%= micropost.id %>">
+<li id="micropost-<%= micropost.id %>" class = "active">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
@@ -8,8 +8,19 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
     <% if current_user?(micropost.user) %>
-      <%= link_to "delete", micropost, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+      <%= link_to "Delete", micropost, method: :delete,
+                                        data: { confirm: "You sure delete?"},
+                                        class: "btn btn-danger btn-pre visibility"%>
     <% end %>
   </span>
 </li>
+
+<script type="text/javascript">
+  $(function(){
+    $(".active:has('.visibility')").hover(function() {
+      $(this).find('.visibility').css('visibility', 'visible');
+    }, function() {
+       $(this).find('.visibility').css('visibility', 'hidden');
+    });
+});
+</script>
