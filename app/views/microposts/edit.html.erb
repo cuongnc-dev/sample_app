@@ -1,0 +1,27 @@
+<% provide(:title, "Edit micropost") %>
+<h1>Update your micropost</h1>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@micropost, html: { multipart: true }) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <%= f.label :Content %>
+      <div class="field">
+        <%= f.text_area :content, placeholder: "Edit micropost..." %>
+      </div>
+      <%= f.label :'Change picture' %>
+      <span class="picture">
+        <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png' %>
+      </span>
+      <% if @micropost.picture? %>
+        <label for="micropost_Avatar">Current picture</label>
+        <br>
+        <%= image_tag @micropost.picture.url, class: 'avatar', size:70 %> 
+      <% end %>
+      <hr>
+      <%= f.submit "Post", class: "btn btn-primary" %>
+    <% end %>
+
+
+  </div>
+</div>
